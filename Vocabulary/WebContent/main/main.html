@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../lib/bootstrap.min.css">
+<style>
+.navbar {
+	border-radius: 0;
+}
+</style>
+
+<script src="../lib/angular.js"></script>
+<script src="../lib/angular-ui-router.min.js"></script>
+
+<script src="../app/app.js"></script>
+<script src="../nevigator/nevigator.js"></script>
+<script src="../page1/dogs.js"></script>
+<script src="../show_words/word_table.js"></script>
+<script src="../show_words/show_words.js"></script>
+<script src="mainController.js"></script>
+</head>
+
+
+
+<body ng-controller='mainController as mainControl'>
+
+	<nav class="navbar navbar-inverse" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" ui-sref="#">Learn Vocabulary</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a ui-sref="home">Home</a></li>
+			<li><a ui-sref="show_words">Show Words</a></li>
+			<li><a ui-sref="home">select Translation</a></li>
+			<li><a ui-sref="home">Translate</a></li>
+			<li><a ui-sref="about">About</a></li>
+		</ul>
+	</nav>
+
+	<!-- MAIN CONTENT -->
+	<div class="container">
+
+		<!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+		<div ui-view></div>
+
+	</div>
+</body>
+
+</html>
