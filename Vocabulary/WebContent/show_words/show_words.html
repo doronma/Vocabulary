@@ -1,12 +1,15 @@
 <div class="container" ng-controller='showWords as showWordsControl'>
 
  <table class="table table-striped">
-  <tr ng-repeat="word in showWordsControl.wordsToLearn.words">
+  <tr ng-repeat="word in showWordsControl.wordsToLearn.words|orderBy:showWordsControl.random">
     <td>{{ word.eng }}</td>
     <td align="right">{{ word.heb }}</td>
   </tr>
 </table>
 
+
+
     
 </div>
 
+    
