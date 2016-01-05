@@ -17,6 +17,12 @@ nav.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: '../show_words/show_words.html'
     })
     
+    
+     .state('word_selection', {
+        url: '/word_selction',
+        templateUrl: '../word_selection/WordSelection.html'
+    })
+    
 
 
     // nested list with custom controller
