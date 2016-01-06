@@ -20,7 +20,12 @@ nav.config(function ($stateProvider, $urlRouterProvider) {
     
      .state('word_selection', {
         url: '/word_selction',
-        templateUrl: '../word_selection/WordSelection.html'
+        templateUrl: '../show_words/word_selection.html'
+    })
+    
+     .state('write_words', {
+        url: '/write_words',
+        templateUrl: '../show_words/write_words.html'
     })
     
 

@@ -1,0 +1,41 @@
+
+<div class="container" ng-controller='showWords as showWordsControl'>
+
+
+	<div class="row">
+		<div class="col-sm-4">
+			<div class="panel panel-default">
+				<div class="panel-body"><h4>Word {{showWordsControl.counter+1}} of
+					{{showWordsControl.wordList.length}} :
+					<strong>{{showWordsControl.wordList[showWordsControl.counter].heb}}</strong></h4></div>
+			</div>
+
+			<table class="table .table-condensed">
+				<tr ng-repeat="word in showWordsControl.wordsToLearn.words">
+					<td>{{ word.eng }}</td>
+
+					<td><a class="btn btn-primary btn-sm"
+						ng-click="showWordsControl.selectWord(word.eng)">select</a></td>
+				</tr>
+			</table>
+		</div>
+		<div class="col-sm-4">
+
+			<div class="alert alert-info" ng-if="!showWordsControl.dirty">
+				<Strong>Please Select word</Strong>
+			</div>
+			<div class="alert alert-success"
+				ng-if="showWordsControl.lastResult && showWordsControl.dirty">
+				<Strong>Good Answer</Strong>
+			</div>
+			<div class="alert alert-danger"
+				ng-if="!showWordsControl.lastResult && showWordsControl.dirty">
+				<Strong>Wrong Answer</Strong>
+			</div>
+
+			<a class="btn btn-info" ng-click="showWordsControl.reset()">Reset</a>
+		</div>
+		<div class="col-sm-4"></div>
+
+	</div>
+</div>
