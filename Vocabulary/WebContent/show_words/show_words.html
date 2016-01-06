@@ -1,15 +1,24 @@
 <div class="container" ng-controller='showWords as showWordsControl'>
 
- <table class="table table-striped">
-  <tr ng-repeat="word in showWordsControl.wordsToLearn.words">
-    <td>{{ word.eng }}</td>
-    <td align="right">{{ word.heb }}</td>
-  </tr>
-</table>
+
+	<div class="row">
+		<div class="col-sm-4">
+			<h4> Current Word List :</h4>
+			<br>
+			<table class="table table-hover">
+				<tr ng-repeat="word in showWordsControl.wordsToLearn.words">
+					<td>{{ word.eng }}</td>
+					<td align="right">{{ word.heb }}</td>
+				</tr>
+			</table>
+
+		</div>
+		<div class="col-sm-8"></div>
+
+	</div>
 
 
 
-    
+
 </div>
 
-    
