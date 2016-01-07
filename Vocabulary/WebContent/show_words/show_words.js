@@ -1,12 +1,15 @@
 var showWordsApp = angular.module("showWordsApp", [ 'vocServices' ]);
-showWordsApp.controller('showWords', function(arrayUtil) {
+showWordsApp.controller('showWords', function(arrayUtil,wordGroup) {
 
-	this.wordsToLearn = JSON.parse(text);
+	
+	
+	//this.wordsToLearn = JSON.parse(text);
 	this.random = function() {
 		return 0.5 - Math.random();
 
 	};
-	this.words = this.wordsToLearn.words;
+	//this.words = this.wordsToLearn.words;
+	this.words = wordGroup.getCurrentWordList();
 	this.wordList = this.words.slice(0);
 	arrayUtil.shuffle(this.wordList);
 	this.lastResult;
@@ -47,5 +50,5 @@ showWordsApp.controller('showWords', function(arrayUtil) {
 		arrayUtil.shuffle(this.wordList);
 
 	}
-
+	
 });
