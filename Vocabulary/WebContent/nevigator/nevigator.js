@@ -1,4 +1,4 @@
-var nav = angular.module("navigator", ['ui.router','dogApp','showWordsApp']);
+var nav = angular.module("navigator", ['ui.router','dogApp','showWordsApp','wordGroupSelectionApp']);
 
 nav.config(function ($stateProvider, $urlRouterProvider) {
 
@@ -12,7 +12,12 @@ nav.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: '../main/partial_home.html'
     })
     
-        .state('show_words', {
+        .state('word_group_selection', {
+        url: '/word_group_selection',
+        templateUrl: '../wordGroupSelection/wordGroupSelection.html'
+    })
+    
+         .state('show_words', {
         url: '/show_words',
         templateUrl: '../show_words/show_words.html'
     })

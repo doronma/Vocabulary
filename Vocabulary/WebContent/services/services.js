@@ -22,22 +22,43 @@ vocServices.service('arrayUtil', function() {
 	}
 });
 
-vocServices.service('wordGroup', function() {
-	
-	 this.group = '{ "words" : [' +
-     '{ "eng":"Dog" , "heb":"כלב" },' +
-     '{ "eng":"Cat" , "heb":"חתול" },' +
-     '{ "eng":"Elephant" , "heb":"פיל" },' +
-     '{ "eng":"Fish" , "heb":"דג" },' +
-     '{ "eng":"Spider" , "heb":"עכביש" },' +
-     '{ "eng":"Zebra" , "heb":"זברה" },' +
-     '{ "eng":"Shark" , "heb":"כריש" },' +
-     '{ "eng":"Tree" , "heb":"עץ" },' +
-     '{ "eng":"Flower" , "heb":"פרח" },' +
-     '{ "eng":"Frog" , "heb":"צפרדע" }]}'
-	
-	this.wordsToLearn = JSON.parse(this.group);
-	this.getCurrentWordList = function(){
-		return this.wordsToLearn.words;
-	}
-});
+vocServices
+		.service(
+				'wordGroup',
+				function() {
+
+					this.animals = '{ "words" : ['
+							+ '{ "eng":"Dog" , "heb":"כלב" },'
+							+ '{ "eng":"Cat" , "heb":"חתול" },'
+							+ '{ "eng":"Elephant" , "heb":"פיל" },'
+							+ '{ "eng":"Fish" , "heb":"דג" },'
+							+ '{ "eng":"Spider" , "heb":"עכביש" },'
+							+ '{ "eng":"Zebra" , "heb":"זברה" },'
+							+ '{ "eng":"Shark" , "heb":"כריש" },'
+							+ '{ "eng":"Tree" , "heb":"עץ" },'
+							+ '{ "eng":"Flower" , "heb":"פרח" },'
+							+ '{ "eng":"Frog" , "heb":"צפרדע" }]}';
+
+					this.weekDays = '{ "words" : ['
+							+ '{ "eng":"Sunday" , "heb":"יום ראשון" },'
+							+ '{ "eng":"Monday" , "heb":"יום שני" },'
+							+ '{ "eng":"Tuesday" , "heb":"יום שלישי" },'
+							+ '{ "eng":"Wednesday" , "heb":"יום רביעי" },'
+							+ '{ "eng":"Thursday" , "heb":"יום חמישי" },'
+							+ '{ "eng":"Friday" , "heb":"יום שישי" },'
+							+ '{ "eng":"Saturday" , "heb":"יום שבת" }]}';
+
+					this.wordGroupJson = '{"wordGroup" : [{"groupName":"animals"},{"groupName":"weekDays"}]}';
+
+					this.currentWordListJson = this.weekDays
+
+					this.wordsToLearn = JSON.parse(this.currentWordListJson);
+					this.getCurrentWordList = function() {
+						return this.wordsToLearn.words;
+					}
+					this.wordGroup = JSON.parse(this.wordGroupJson);
+					this.getWordGroup = function() {
+						return this.wordGroup.wordGroup;
+					}
+
+				});
