@@ -1,23 +1,16 @@
 var showWordsApp = angular.module("showWordsApp", [ 'vocServices' ]);
-showWordsApp.controller('showWords', function(arrayUtil, wordGroup) {
+showWordsApp.controller('showWords', function(arrayUtil, wordManager) {
 
-	// this.words = this.wordsToLearn.words;
-	this.words = wordGroup.getCurrentWordList();
-	this.wordList = this.words.slice(0);
-	arrayUtil.shuffle(this.wordList);
-	this.lastResult;
-	this.dirty = false;
-	this.counter = 0;
-	this.translation = "";
 	this.count = function() {
 		if (this.counter < this.words.length - 1) {
 			this.counter++;
 		} else {
-			alert('no more');
+			this.status = 'finished';
 		}
 	}
+	// check for Word Selection
 	this.selectWord = function(word) {
-		this.dirty = true;
+		this.status = 'active';
 		if (word == this.wordList[this.counter].eng) {
 			this.count();
 			this.lastResult = true;
@@ -26,19 +19,44 @@ showWordsApp.controller('showWords', function(arrayUtil, wordGroup) {
 		}
 	}
 
+	// check for Word Translation
 	this.checkWord = function() {
-		this.dirty = true;
+		this.status = 'active';
 		if (this.translation == this.wordList[this.counter].eng) {
 			this.count();
 			this.lastResult = true;
+			this.translation='';
 		} else {
 			this.lastResult = false;
 		}
 	}
 	this.reset = function() {
 		this.counter = 0;
-		this.dirty = false
+		this.status = 'start';
 		arrayUtil.shuffle(this.wordList);
 	}
+
+	this.actionSuccess = function() {
+		return this.status == 'active' && this.lastResult
+	}
+
+	this.actionError = function() {
+		return this.status == 'active' && !this.lastResult
+	}
+
+	this.actionSuccessAll = function() {
+		return this.status == 'finished' && this.lastResult
+	}
+
+	this.init = function() {
+		this.selectedList = wordManager.getSelectedList();
+		this.words = wordManager.getCurrentWordList();
+		this.wordList = this.words.slice(0);
+		this.lastResult;
+		this.counter = 0;
+		this.translation = "";
+		this.reset();
+	}
+	this.init();
 
 });

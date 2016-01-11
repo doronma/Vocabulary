@@ -1,3 +1,31 @@
 <div ng-controller='wordGroupSelection as wordGroupController'>
-Hello World Selectin ....
+
+
+<div class="row">
+		<div class="col-sm-6">
+			
+			<div class="alert alert-info" >
+			Current Selected Word List: <strong>{{wordGroupController.selectedList}}</strong>
+			<br> <br>
+				<h4>
+					<strong>Select a new word group :</strong>
+				</h4>
+			</div>
+			<br>
+			<div class="span3">
+			<table class="table table-hover table-bordered">
+				<tr ng-repeat="group in wordGroupController.wordGroup"  ng-click="wordGroupController.selectRow(group.groupName)">
+					<td>{{ group.groupName }}</td>
+					
+				</tr>
+			</table>
+			</div>
+
+		</div>
+		<div class="col-sm-6">
+		<img src="../img/voc7.jpg" class="img-thumbnail">
+		</div>
+
+	</div>
+	
 </div>

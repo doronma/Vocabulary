@@ -3,39 +3,44 @@
 
 
 	<div class="row">
-		<div class="col-sm-4">
-			<div class="panel panel-default">
-				<div class="panel-body"><h4>Word {{showWordsControl.counter+1}} of
-					{{showWordsControl.wordList.length}} :
-					<strong>{{showWordsControl.wordList[showWordsControl.counter].heb}}</strong></h4></div>
+		<div class="col-sm-6">
+			<div class="alert alert-info">
+				Current Selected Word List: <strong>{{showWordsControl.selectedList}}</strong>
+				<br><br>
+				<h4>
+					Word {{showWordsControl.counter+1}} of
+					{{showWordsControl.wordList.length}} : <strong>{{showWordsControl.wordList[showWordsControl.counter].heb}}</strong>
+				</h4>
+			</div>
+			<div class="alert alert-info" ng-if="showWordsControl.status=='start'">
+				<Strong>Please select a word from the list</Strong>
+			</div>
+			<div class="alert alert-success"
+				ng-if="showWordsControl.actionSuccess()">
+				<Strong>Good Answer</Strong>
+			</div>
+			<div class="alert alert-danger"
+				ng-if="showWordsControl.actionError()">
+				<Strong>Wrong Answer</Strong>
+			</div>
+			<div class="alert alert-success"
+				ng-if="showWordsControl.actionSuccessAll()">
+				<Strong>Good Answer,  No more Words</Strong>
 			</div>
 
 			<table class="table .table-condensed">
 				<tr ng-repeat="word in showWordsControl.words">
 					<td>{{ word.eng }}</td>
 
-					<td><a class="btn btn-primary btn-sm"
-						ng-click="showWordsControl.selectWord(word.eng)">select</a></td>
+					<td><button class="btn btn-primary btn-sm"
+						ng-click="showWordsControl.selectWord(word.eng)" ng-disabled="showWordsControl.actionSuccessAll()">select</button></td>
 				</tr>
 			</table>
+			<a class="btn btn-info" ng-click="showWordsControl.reset()" >Reset</a>
 		</div>
-		<div class="col-sm-4">
+		<div class="col-sm-6">
+			<img src="../img/voc6.jpg" class="img-thumbnail"></div>
 
-			<div class="alert alert-info" ng-if="!showWordsControl.dirty">
-				<Strong>Please Select word</Strong>
-			</div>
-			<div class="alert alert-success"
-				ng-if="showWordsControl.lastResult && showWordsControl.dirty">
-				<Strong>Good Answer</Strong>
-			</div>
-			<div class="alert alert-danger"
-				ng-if="!showWordsControl.lastResult && showWordsControl.dirty">
-				<Strong>Wrong Answer</Strong>
-			</div>
-
-			<a class="btn btn-info" ng-click="showWordsControl.reset()">Reset</a>
-		</div>
-		<div class="col-sm-4"></div>
 
 	</div>
 </div>
