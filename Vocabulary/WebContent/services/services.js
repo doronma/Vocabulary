@@ -22,26 +22,40 @@ vocServices.service('arrayUtil', function() {
 	}
 });
 
-vocServices.service('wordManager', function() {
+vocServices.service('wordManagerServer', function($http) {
+	this.getData = function() {
+		return $http({
+			method : "GET",
+			url : "http://localhost:8080/getWords"
+		}).then(function(result) {
+			return result.data
+		})
+	}
 
-	this.animals = '{ "words" : [' + '{ "eng":"Dog" , "heb":"כלב" },'
-			+ '{ "eng":"Cat" , "heb":"חתול" },'
-			+ '{ "eng":"Elephant" , "heb":"פיל" },'
-			+ '{ "eng":"Fish" , "heb":"דג" },'
-			+ '{ "eng":"Spider" , "heb":"עכביש" },'
-			+ '{ "eng":"Zebra" , "heb":"זברה" },'
-			+ '{ "eng":"Shark" , "heb":"כריש" },'
-			+ '{ "eng":"Tree" , "heb":"עץ" },'
-			+ '{ "eng":"Flower" , "heb":"פרח" },'
-			+ '{ "eng":"Frog" , "heb":"צפרדע" }]}';
+});
 
-	this.weekDays = '{ "words" : [' + '{ "eng":"Sunday" , "heb":"יום ראשון" },'
-			+ '{ "eng":"Monday" , "heb":"יום שני" },'
-			+ '{ "eng":"Tuesday" , "heb":"יום שלישי" },'
-			+ '{ "eng":"Wednesday" , "heb":"יום רביעי" },'
-			+ '{ "eng":"Thursday" , "heb":"יום חמישי" },'
-			+ '{ "eng":"Friday" , "heb":"יום שישי" },'
-			+ '{ "eng":"Saturday" , "heb":"יום שבת" }]}';
+vocServices.service('wordManager', function(wordManagerServer) {
+
+	this.animals = '{ "vocabularyWordList" : ['
+			+ '{ "engWord":"Dog" , "hebWord":"כלב" },'
+			+ '{ "engWord":"Cat" , "hebWord":"חתול" },'
+			+ '{ "engWord":"Elephant" , "hebWord":"פיל" },'
+			+ '{ "engWord":"Fish" , "hebWord":"דג" },'
+			+ '{ "engWord":"Spider" , "hebWord":"עכביש" },'
+			+ '{ "engWord":"Zebra" , "hebWord":"זברה" },'
+			+ '{ "engWord":"Shark" , "hebWord":"כריש" },'
+			+ '{ "engWord":"Tree" , "hebWord":"עץ" },'
+			+ '{ "engWord":"Flower" , "hebWord":"פרח" },'
+			+ '{ "engWord":"Frog" , "hebWord":"צפרדע" }]}';
+
+	this.weekDays1 = '{ "vocabularyWordList" : ['
+			+ '{ "engWord":"Sunday1" , "hebWord":"יום ראשון" },'
+			+ '{ "engWord":"Monday" , "hebWord":"יום שני" },'
+			+ '{ "engWord":"Tuesday" , "hebWord":"יום שלישי" },'
+			+ '{ "engWord":"Wednesday" , "hebWord":"יום רביעי" },'
+			+ '{ "engWord":"Thursday" , "hebWord":"יום חמישי" },'
+			+ '{ "engWord":"Friday" , "hebWord":"יום שישי" },'
+			+ '{ "engWord":"Saturday" , "hebWord":"יום שבת" }]}';
 
 	this.wordGroupJson = '{"wordGroup" : [' + '{"groupName":"Animals"},'
 			+ '{"groupName":"WeekDays"},' + '{"groupName":"WeekDays2"},'
@@ -52,7 +66,7 @@ vocServices.service('wordManager', function() {
 			+ ']}';
 
 	this.getCurrentWordList = function() {
-		return this.wordsToLearn.words;
+		return this.wordsToLearn.vocabularyWordList;
 	}
 
 	this.getWordGroup = function() {
@@ -61,13 +75,11 @@ vocServices.service('wordManager', function() {
 
 	this.updateWordList = function(selectedList) {
 		if (selectedList == "Animals") {
-
-			this.currentWordListJson = this.animals;
+			this.wordsToLearn = JSON.parse(this.animals);
 		}
 		if (selectedList == "WeekDays") {
-			this.currentWordListJson = this.weekDays;
+			this.wordsToLearn = this.weekDays;
 		}
-		this.wordsToLearn = JSON.parse(this.currentWordListJson);
 		this.selectedListName = selectedList;
 
 	}
@@ -78,7 +90,18 @@ vocServices.service('wordManager', function() {
 
 	this.init = function() {
 		this.wordGroup = JSON.parse(this.wordGroupJson);
-		this.updateWordList('WeekDays');
+		//this.updateWordList('WeekDays');
+		var wordManagerService = this;
+
+		wordManagerServer.getData().then(function(result) {
+			wordManagerService.weekDays = result;
+			alert('ok');
+			
+			wordManagerService.updateWordList('WeekDays');
+			
+		});
+
 	}
+
 	this.init();
 });

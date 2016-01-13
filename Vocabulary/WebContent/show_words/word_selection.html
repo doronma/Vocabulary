@@ -9,7 +9,7 @@
 				<br><br>
 				<h4>
 					Word {{showWordsControl.counter+1}} of
-					{{showWordsControl.wordList.length}} : <strong>{{showWordsControl.wordList[showWordsControl.counter].heb}}</strong>
+					{{showWordsControl.wordList.length}} : <strong>{{showWordsControl.wordList[showWordsControl.counter].hebWord}}</strong>
 				</h4>
 			</div>
 			<div class="alert alert-info" ng-if="showWordsControl.status=='start'">
@@ -30,10 +30,10 @@
 
 			<table class="table .table-condensed">
 				<tr ng-repeat="word in showWordsControl.words">
-					<td>{{ word.eng }}</td>
+					<td>{{ word.engWord }}</td>
 
 					<td><button class="btn btn-primary btn-sm"
-						ng-click="showWordsControl.selectWord(word.eng)" ng-disabled="showWordsControl.actionSuccessAll()">select</button></td>
+						ng-click="showWordsControl.selectWord(word.engWord)" ng-disabled="showWordsControl.actionSuccessAll()">select</button></td>
 				</tr>
 			</table>
 			<a class="btn btn-info" ng-click="showWordsControl.reset()" >Reset</a>

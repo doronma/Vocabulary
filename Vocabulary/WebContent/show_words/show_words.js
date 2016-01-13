@@ -11,7 +11,7 @@ showWordsApp.controller('showWords', function(arrayUtil, wordManager) {
 	// check for Word Selection
 	this.selectWord = function(word) {
 		this.status = 'active';
-		if (word == this.wordList[this.counter].eng) {
+		if (word == this.wordList[this.counter].engWord) {
 			this.count();
 			this.lastResult = true;
 		} else {
@@ -22,7 +22,7 @@ showWordsApp.controller('showWords', function(arrayUtil, wordManager) {
 	// check for Word Translation
 	this.checkWord = function() {
 		this.status = 'active';
-		if (this.translation == this.wordList[this.counter].eng) {
+		if (this.translation == this.wordList[this.counter].engWord) {
 			this.count();
 			this.lastResult = true;
 			this.translation='';

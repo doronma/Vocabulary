@@ -2,3 +2,7 @@
     height: 400px !important;
     overflow: scroll;
 }
+
+.navbar {
+	border-radius: 0;
+}
