@@ -1,13 +1,18 @@
 var wordGroupSelectionApp = angular.module("wordGroupSelectionApp",
 		[ 'vocServices' ]);
-wordGroupSelectionApp.controller('wordGroupSelection', function(wordManager) {
-	this.wordGroup = wordManager.getWordGroup();
+wordGroupSelectionApp.controller('wordGroupSelection', function(wordManager,
+		wordManagerServer) {
+
 	this.selectRow = function(groupName) {
 		wordManager.updateWordList(groupName);
-		this.selectedList = wordManager.getSelectedList();
+		this.selectedGroupName = wordManager.getSelectedGroupName();
 	}
 	this.init = function() {
-		this.selectedList = wordManager.getSelectedList();
+		var currentController = this;
+		wordManagerServer.getWordGroupNames().then(function(result) {
+			currentController.wordGroupNameList = result;
+			currentController.selectedGroupName = currentController.wordGroupNameList[0]
+		})
 	}
 	this.init();
 

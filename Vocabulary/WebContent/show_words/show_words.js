@@ -49,7 +49,7 @@ showWordsApp.controller('showWords', function(arrayUtil, wordManager) {
 	}
 
 	this.init = function() {
-		this.selectedList = wordManager.getSelectedList();
+		this.selectedList = wordManager.getSelectedGroupName();
 		this.words = wordManager.getCurrentWordList();
 		this.wordList = this.words.slice(0);
 		this.lastResult;

@@ -5,7 +5,7 @@
 		<div class="col-sm-6">
 			
 			<div class="alert alert-info" >
-			Current Selected Word List: <strong>{{wordGroupController.selectedList}}</strong>
+			Current Selected Word List: <strong>{{wordGroupController.selectedGroupName}}</strong>
 			<br> <br>
 				<h4>
 					<strong>Select a new word group :</strong>
@@ -14,8 +14,8 @@
 			<br>
 			<div class="span3">
 			<table class="table table-hover table-bordered">
-				<tr ng-repeat="group in wordGroupController.wordGroup"  ng-click="wordGroupController.selectRow(group.groupName)">
-					<td>{{ group.groupName }}</td>
+				<tr ng-repeat="wordGroupName in wordGroupController.wordGroupNameList"  ng-click="wordGroupController.selectRow(wordGroupName)">
+					<td>{{ wordGroupName }}</td>
 					
 				</tr>
 			</table>

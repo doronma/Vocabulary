@@ -31,6 +31,14 @@ vocServices.service('wordManagerServer', function($http) {
 			return result.data
 		})
 	}
+	this.getWordGroupNames = function() {
+		return $http({
+			method : "GET",
+			url : "http://localhost:8080/getWordGroupNameList"
+		}).then(function(result) {
+			return result.data
+		})
+	}
 
 });
 
@@ -57,49 +65,46 @@ vocServices.service('wordManager', function(wordManagerServer) {
 			+ '{ "engWord":"Friday" , "hebWord":"יום שישי" },'
 			+ '{ "engWord":"Saturday" , "hebWord":"יום שבת" }]}';
 
-	this.wordGroupJson = '{"wordGroup" : [' + '{"groupName":"Animals"},'
-			+ '{"groupName":"WeekDays"},' + '{"groupName":"WeekDays2"},'
-			+ '{"groupName":"WeekDays3"},' + '{"groupName":"WeekDays4"},'
-			+ '{"groupName":"WeekDays5"},' + '{"groupName":"WeekDays6"},'
-			+ '{"groupName":"WeekDays7"},' + '{"groupName":"WeekDays8"},'
-			+ '{"groupName":"WeekDays9"},' + '{"groupName":"WeekDays10"}'
-			+ ']}';
-
+	
 	this.getCurrentWordList = function() {
 		return this.wordsToLearn.vocabularyWordList;
 	}
 
-	this.getWordGroup = function() {
-		return this.wordGroup.wordGroup;
-	}
+	
 
-	this.updateWordList = function(selectedList) {
-		if (selectedList == "Animals") {
+	this.updateWordList = function(selectedGroupName) {
+		if (selectedGroupName == "Animals") {
 			this.wordsToLearn = JSON.parse(this.animals);
 		}
-		if (selectedList == "WeekDays") {
+		if (selectedGroupName == "WeekDays") {
 			this.wordsToLearn = this.weekDays;
 		}
-		this.selectedListName = selectedList;
+		this.setSelectedGroupName(selectedGroupName);
 
 	}
 
-	this.getSelectedList = function() {
-		return this.selectedListName;
+	this.getSelectedGroupName = function() {
+		return this.selectedGroupName;
+	}
+	
+	this.setSelectedGroupName = function(selectedGroupName){
+		this.selectedGroupName = selectedGroupName;
 	}
 
 	this.init = function() {
-		this.wordGroup = JSON.parse(this.wordGroupJson);
+		//this.wordGroup = JSON.parse(this.wordGroupJson);
 		//this.updateWordList('WeekDays');
 		var wordManagerService = this;
 
 		wordManagerServer.getData().then(function(result) {
 			wordManagerService.weekDays = result;
-			alert('ok');
+			
 			
 			wordManagerService.updateWordList('WeekDays');
-			
 		});
+		
+		
+
 
 	}
 
