@@ -3,7 +3,6 @@ var vocServices = angular.module('vocServices', []);
 vocServices.service('arrayUtil', function() {
 
 	this.shuffle = function(array) {
-		console.log('shuffling array...');
 		var currentIndex = array.length, temporaryValue, randomIndex;
 
 		// While there remain elements to shuffle...
@@ -51,7 +50,7 @@ vocServices.service('wordManagerServer', function($http) {
 
 });
 
-vocServices.service('wordManager', function(wordManagerServer) {
+vocServices.service('wordManagerSession', function(wordManagerServer) {
 	
 	this.getCurrentWordList = function() {
 		return this.currentWordList.wordList;
@@ -69,5 +68,14 @@ vocServices.service('wordManager', function(wordManagerServer) {
 	this.setSelectedGroupName = function(selectedGroupName){
 		this.selectedGroupName = selectedGroupName;
 	}
+	
+	this.setWordGroupNameList = function(wordGroupNameList){
+		this.wordGroupNameList = wordGroupNameList;
+	}
+	this.getWordGroupNameList = function(){
+		return this.wordGroupNameList;
+	}
+	
+	
 	
 });

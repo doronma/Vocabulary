@@ -1,13 +1,13 @@
 var wordGroupSelectionApp = angular.module("wordGroupSelectionApp",
 		[ 'vocServices' ]);
-wordGroupSelectionApp.controller('wordGroupSelection', function(wordManager,
+wordGroupSelectionApp.controller('wordGroupSelection', function(wordManagerSession,
 		wordManagerServer) {
 
 	this.selectRow = function(groupName) {
-		wordManager.setSelectedGroupName(groupName);
+		wordManagerSession.setSelectedGroupName(groupName);
 		this.selectedGroupName = groupName
 		wordManagerServer.getWordGroup(groupName).then(function(result) {
-			wordManager.setCurrentWordList(result)
+			wordManagerSession.setCurrentWordList(result)
 		});
 	}
 
@@ -16,8 +16,9 @@ wordGroupSelectionApp.controller('wordGroupSelection', function(wordManager,
 		wordManagerServer.getWordGroupNames().then(
 				function(result) {
 					currentController.wordGroupNameList = result;
-					// set first group as current
-					// grroup
+					wordManagerSession.setWordGroupNameList(result);
+					currentController.isLoading = false;
+					// set first group as current group
 					currentController
 							.selectRow(currentController.wordGroupNameList[0]);
 				})
@@ -25,7 +26,15 @@ wordGroupSelectionApp.controller('wordGroupSelection', function(wordManager,
 
 	// fetch data on startup
 	this.init = function() {
-		this.getWordGroupNameList();
+		this.isLoading = true;
+		if (wordManagerSession.getSelectedGroupName()== null) {
+			this.getWordGroupNameList();
+		
+		}else{
+			this.selectedGroupName = wordManagerSession.getSelectedGroupName();
+			this.wordGroupNameList = wordManagerSession.getWordGroupNameList();
+			this.isLoading = false;
+		}
 	}
 	this.init();
 

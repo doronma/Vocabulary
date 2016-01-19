@@ -1,5 +1,5 @@
 var showWordsApp = angular.module("showWordsApp", [ 'vocServices' ]);
-showWordsApp.controller('showWords', function(arrayUtil, wordManager) {
+showWordsApp.controller('showWords', function(arrayUtil, wordManagerSession) {
 
 	this.count = function() {
 		if (this.counter < this.words.length - 1) {
@@ -49,8 +49,8 @@ showWordsApp.controller('showWords', function(arrayUtil, wordManager) {
 	}
 
 	this.init = function() {
-		this.selectedList = wordManager.getSelectedGroupName();
-		this.words = wordManager.getCurrentWordList();
+		this.selectedList = wordManagerSession.getSelectedGroupName();
+		this.words = wordManagerSession.getCurrentWordList();
 		this.wordList = this.words.slice(0);
 		this.lastResult;
 		this.counter = 0;
