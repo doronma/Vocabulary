@@ -23,6 +23,11 @@ wordGroupSelectionApp.controller('wordGroupSelection', function(wordManagerSessi
 							.selectRow(currentController.wordGroupNameList[0]);
 				})
 	}
+	
+	//test
+	this.sendData = function(){
+		wordManagerServer.sendWordGroup(wordManagerSession.getCurrentWordListObject());
+	}
 
 	// fetch data on startup
 	this.init = function() {

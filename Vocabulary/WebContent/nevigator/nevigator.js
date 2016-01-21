@@ -32,6 +32,11 @@ nav.config(function ($stateProvider, $urlRouterProvider) {
         url: '/write_words',
         templateUrl: '../show_words/write_words.html'
     })
+     .state('edit_words', {
+        url: '/edit_words',
+        templateUrl: '../wordGroupSelection/wordGroupEditor.html'
+    })
+    
     
 
 

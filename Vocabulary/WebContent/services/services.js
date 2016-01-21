@@ -47,6 +47,20 @@ vocServices.service('wordManagerServer', function($http) {
 			return result.data
 		})
 	}
+	
+	this.sendWordGroup = function(wordGroup){
+		var res=$http.post('http://localhost:8080/sendWords',wordGroup);
+		res.success(function(data,status,headers,config){
+			alert('success');
+		});
+		res.error(function(data,status,headers,config){
+			alert('failure' + JSON.stringify({data: data}));
+			
+		});
+		
+	}
+	
+	
 
 });
 
@@ -55,10 +69,14 @@ vocServices.service('wordManagerSession', function(wordManagerServer) {
 	this.getCurrentWordList = function() {
 		return this.currentWordList.wordList;
 	}
-
+	
 	
 	this.setCurrentWordList = function(newWordList){
 		this.currentWordList = newWordList;
+	}
+	
+	this.getCurrentWordListObject = function(){
+		return this.currentWordList;
 	}
 
 	this.getSelectedGroupName = function() {

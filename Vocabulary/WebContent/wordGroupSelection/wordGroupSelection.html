@@ -1,31 +1,35 @@
 <div ng-controller='wordGroupSelection as wordGroupController'>
 
 
-<div class="row">
+	<div class="row">
 		<div class="col-sm-6">
-			
-			<div class="alert alert-info" >
-			Current Selected Word List: <strong>{{wordGroupController.selectedGroupName}}</strong>
-			<br> <br>
+
+			<div class="alert alert-info">
+				Current Selected Word List: <strong>{{wordGroupController.selectedGroupName}}</strong>
+				<br> <br>
 				<h4>
 					<strong>Select a new word group :</strong>
 				</h4>
 			</div>
 			<br>
+			<div ng-show="wordGroupController.isLoading">Please Wait ...</div>
 			<div class="span3">
-			<table class="table table-hover table-bordered">
-				<tr ng-repeat="wordGroupName in wordGroupController.wordGroupNameList"  ng-click="wordGroupController.selectRow(wordGroupName)">
-					<td>{{ wordGroupName }}</td>
-					
-				</tr>
-			</table>
+				<table class="table table-hover table-bordered">
+					<tr
+						ng-repeat="wordGroupName in wordGroupController.wordGroupNameList"
+						ng-click="wordGroupController.selectRow(wordGroupName)">
+						<td>{{ wordGroupName }}</td>
+
+					</tr>
+				</table>
 			</div>
 
 		</div>
 		<div class="col-sm-6">
-		<img src="../img/voc7.jpg" class="img-thumbnail">
+			<img src="../img/voc7.jpg" class="img-thumbnail"><br> <a
+				class="btn btn-primary" ui-sref="edit_words">Edit words</a>
 		</div>
 
 	</div>
-	
+
 </div>
