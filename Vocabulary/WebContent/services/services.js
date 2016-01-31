@@ -49,9 +49,9 @@ vocServices.service('wordManagerServer', function($http) {
 	}
 	
 	this.sendWordGroup = function(wordGroup){
-		var res=$http.post('http://localhost:8080/sendWords',wordGroup);
+		var res=$http.post('http://localhost:8080/addWordGroup',wordGroup);
 		res.success(function(data,status,headers,config){
-			alert('success');
+			console.log('success');
 		});
 		res.error(function(data,status,headers,config){
 			alert('failure' + JSON.stringify({data: data}));

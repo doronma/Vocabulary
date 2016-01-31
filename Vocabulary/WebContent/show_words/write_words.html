@@ -34,7 +34,7 @@
 						<label for="translation">Translate:</label>
 					</div>
 					<div class="col-sm-6">
-						<input type="text" class="form-control" id="translation"
+						<input type="text" class="form-control" id="translation"  ng-keyup="$event.keyCode == 13 && showWordsControl.checkWord()"
 							ng-model="showWordsControl.translation">
 					</div>
 					<div class="col-sm-3">

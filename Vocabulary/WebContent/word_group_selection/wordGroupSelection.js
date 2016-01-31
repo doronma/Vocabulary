@@ -26,6 +26,7 @@ wordGroupSelectionApp.controller('wordGroupSelection', function(wordManagerSessi
 	
 	//test
 	this.sendData = function(){
+		console.log(wordManagerSession.getCurrentWordListObject());
 		wordManagerServer.sendWordGroup(wordManagerSession.getCurrentWordListObject());
 	}
 
