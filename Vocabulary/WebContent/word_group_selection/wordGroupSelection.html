@@ -2,7 +2,7 @@
 
 
 	<div class="row">
-		<div class="col-sm-6">
+		<div class="col-sm-8">
 
 			<div class="alert alert-info">
 				Current Selected Word List: <strong>{{wordGroupController.selectedGroupName}}</strong>
@@ -16,18 +16,26 @@
 			<div class="span3">
 				<table class="table table-hover table-bordered">
 					<tr
-						ng-repeat="wordGroupName in wordGroupController.wordGroupNameList"
-						ng-click="wordGroupController.selectRow(wordGroupName)">
-						<td>{{ wordGroupName }}</td>
-
+						ng-repeat="wordGroupName in wordGroupController.wordGroupNameList">
+						<td td style="width: 70%"
+							ng-click="wordGroupController.selectRow(wordGroupName)">{{
+							wordGroupName }}</td>
+						<td td style="width: 30%">
+							<button class="btn btn-primary"
+								ng-click="wordGroupController.selectRow(wordGroupName)">Select</button>
+							<button class="btn btn-success"
+								ng-click="wordGroupController.selectRow(wordGroupName)">Edit</button>
+							<button class="btn btn-danger"
+								ng-click="wordGroupController.deleteWordGroup(wordGroupName)">Del</button>
+						</td>
 					</tr>
 				</table>
 			</div>
-
+			<br> <a class="btn btn-primary" ui-sref="edit_words">Add new words</a>
 		</div>
-		<div class="col-sm-6">
-			<img src="../img/voc7.jpg" class="img-thumbnail"><br> <a
-				class="btn btn-primary" ui-sref="edit_words">Edit words</a> 
+
+		<div class="col-sm-4">
+			<img src="../img/voc7.jpg" class="img-thumbnail"><br>
 		</div>
 
 	</div>

@@ -25,9 +25,9 @@ wordGroupSelectionApp.controller('wordGroupSelection', function(wordManagerSessi
 	}
 	
 	//test
-	this.sendData = function(){
-		console.log(wordManagerSession.getCurrentWordListObject());
-		wordManagerServer.sendWordGroup(wordManagerSession.getCurrentWordListObject());
+	this.deleteWordGroup = function(groupName){
+		console.log('Deleting - ' + groupName);
+		//wordManagerServer.sendWordGroup(wordManagerSession.getCurrentWordListObject());
 	}
 
 	// fetch data on startup
