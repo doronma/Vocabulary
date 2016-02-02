@@ -33,8 +33,9 @@ wordGroupSelectionApp.controller('wordGroupSelection', function(wordManagerSessi
 	// fetch data on startup
 	this.init = function() {
 		this.isLoading = true;
-		if (wordManagerSession.getSelectedGroupName()== null) {
+		if (wordManagerSession.getSelectedGroupName()== null || wordManagerSession.getShouldUpdateWordGroupNameList()) {
 			this.getWordGroupNameList();
+			 wordManagerSession.setShouldUpdateWordGroupNameList(false);	
 		
 		}else{
 			this.selectedGroupName = wordManagerSession.getSelectedGroupName();

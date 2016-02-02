@@ -1,76 +1,75 @@
 <div class="row">
 	<div class="col-sm-8">
-
-
-
-		<div ng-controller='wordGroupSelection as wordGroupController'>
-			<button class="btn btn-primary btn-sm"
-				ng-click="wordGroupController.sendData()">send data test</button>
-			<a class="btn btn-primary" ui-sref="word_group_selection">Back</a> <br>
-		</div>
-		<br>
-
-
 		<div ng-controller='wordEdit as wordEditController'>
+			<div ng-show="!wordEditController.showSaveSuccess">
 
-			<div class="alert alert-info">
-				Current Selected Word List: <a href="#"
-					editable-text="wordEditController.groupName" e-required
-					e-placeholder="Group Name"><strong>{{
-						wordEditController.groupName || 'Group Name' }}</strong></a>
+				<div class="alert alert-info">
+					Current Selected Word List: <a href="#"
+						editable-text="wordEditController.groupName" e-required
+						e-placeholder="Group Name"><strong>{{
+							wordEditController.groupName || 'Group Name' }}</strong></a>
+
+				</div>
+
+				<table class="table table-bordered table-hover table-condensed">
+					<tr style="font-weight: bold">
+						<td style="width: 35%">English Word</td>
+						<td style="width: 20%">Hebrew Word</td>
+						<td style="width: 25%">Edit</td>
+					</tr>
+					<tr ng-repeat="word in wordEditController.words">
+						<td><span editable-text="word.engWord" e-name="engWord"
+							e-form="rowform" e-placeholder="Enter English Word"
+							onbeforesave="wordEditController.checkEngWord($data)"> {{
+								word.engWord }} </span></td>
+						<td align="right">
+							<!-- editable status (select-local) --> <span
+							editable-text="word.hebWord" e-name="hebWord" e-form="rowform"
+							e-placeholder="Enter Hebrew Word"
+							onbeforesave="wordEditController.checkHebWord($data)">
+								{{word.hebWord}} </span>
+						</td>
+
+						<td style="white-space: nowrap">
+							<!-- form -->
+							<form editable-form name="rowform"
+								onbeforesave="wordEditController.saveWordFromRow($data, word)"
+								ng-show="rowform.$visible" class="form-buttons form-inline"
+								shown="wordEditController.inserted == word">
+								<button type="submit" ng-disabled="rowform.$waiting"
+									class="btn btn-primary">save</button>
+								<button type="button" ng-disabled="rowform.$waiting"
+									ng-click="rowform.$cancel()" class="btn btn-default">
+									cancel</button>
+							</form>
+							<div class="buttons" ng-show="!rowform.$visible">
+								<button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+								<button class="btn btn-danger"
+									ng-click="wordEditController.removeWord($index)">del</button>
+							</div>
+						</td>
+					</tr>
+				</table>
+
+				<button class="btn btn-default"
+					ng-click="wordEditController.addWord()">Add row</button>
+					<br> <br>
+				<button class="btn btn-primary"
+					ng-click="wordEditController.saveData()">Save group data</button>
+					<button class="btn btn-warning" ui-sref="word_group_selection">Cancel</button>
+
+
 
 			</div>
+			<div ng-show="wordEditController.showSaveSuccess">
 
-			<table class="table table-bordered table-hover table-condensed">
-				<tr style="font-weight: bold">
-					<td style="width: 35%">English Word</td>
-					<td style="width: 20%">Hebrew Word</td>
-					<td style="width: 25%">Edit</td>
-				</tr>
-				<tr ng-repeat="word in wordEditController.words">
-					<td><span editable-text="word.engWord" e-name="engWord"
-						e-form="rowform" e-placeholder="Enter English Word"
-						onbeforesave="wordEditController.checkEngWord($data)"> {{
-							word.engWord }} </span></td>
-					<td align="right">
-						<!-- editable status (select-local) --> <span
-						editable-text="word.hebWord" e-name="hebWord" e-form="rowform"
-						e-placeholder="Enter Hebrew Word"
-						onbeforesave="wordEditController.checkHebWord($data)">
-							{{word.hebWord}} </span>
-					</td>
-
-					<td style="white-space: nowrap">
-						<!-- form -->
-						<form editable-form name="rowform"
-							onbeforesave="wordEditController.saveWordFromRow($data, word)"
-							ng-show="rowform.$visible" class="form-buttons form-inline"
-							shown="wordEditController.inserted == word">
-							<button type="submit" ng-disabled="rowform.$waiting"
-								class="btn btn-primary">save</button>
-							<button type="button" ng-disabled="rowform.$waiting"
-								ng-click="rowform.$cancel()" class="btn btn-default">
-								cancel</button>
-						</form>
-						<div class="buttons" ng-show="!rowform.$visible">
-							<button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
-							<button class="btn btn-danger"
-								ng-click="wordEditController.removeWord($index)">del</button>
-						</div>
-					</td>
-				</tr>
-			</table>
-
-			<button class="btn btn-default"
-				ng-click="wordEditController.addWord()">Add row</button>
-			<button class="btn btn-default"
-				ng-click="wordEditController.showWords()">Show Words</button>
-				<br><br>
-			<button class="btn btn-primary" ng-click="wordEditController.saveData()">Save group data</button>	
-
-
+				<div class="alert alert-success">
+					Save successful for wordGroup <strong>{{
+						wordEditController.groupName }}</strong> <br> <br> <a
+						class="btn btn-primary" ui-sref="word_group_selection">OK</a>
+				</div>
+			</div>
 		</div>
-
 	</div>
 	<div class="col-sm-4">
 		<img src="../img/funny-pencil130622.jpg" class="img-thumbnail">

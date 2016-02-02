@@ -49,17 +49,23 @@ wordEditApp.controller('wordEdit', function(wordManagerServer,wordManagerSession
 	
 	this.saveData = function(){
 		this.wordGroup = {
-			id : '0',
 			groupName:this.groupName,
 			wordList : this.words	
 		};
-		wordManagerServer.sendWordGroup(this.wordGroup);
+		var wordEdit = this;
+		wordManagerServer.sendWordGroup(this.wordGroup).then(
+				function(result) {
+				console.log(result);
+				 wordManagerSession.setShouldUpdateWordGroupNameList(true);	
+				 wordEdit.showSaveSuccess=true;
+				})
 	}
 
 	this.init = function() {
 		this.groupName = '';
 		this.words = [];
 		this.addWord();
+		this.showSaveSuccess=false;
 	}
 	this.init();
 

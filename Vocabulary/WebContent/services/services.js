@@ -49,18 +49,15 @@ vocServices.service('wordManagerServer', function($http) {
 	}
 	
 	this.sendWordGroup = function(wordGroup){
-		var res=$http.post('http://localhost:8080/addWordGroup',wordGroup);
-		res.success(function(data,status,headers,config){
-			console.log('success');
-		});
-		res.error(function(data,status,headers,config){
-			alert('failure' + JSON.stringify({data: data}));
-			
-		});
-		
-	}
-	
-	
+		var currentURL = 'http://localhost:8080/addWordGroup';
+		return $http({
+			method : "POST",
+			url : currentURL,
+			data : wordGroup
+		}).then(function(result){
+			console.log('in post then');
+			return result.data
+		})}
 
 });
 
@@ -92,6 +89,15 @@ vocServices.service('wordManagerSession', function(wordManagerServer) {
 	}
 	this.getWordGroupNameList = function(){
 		return this.wordGroupNameList;
+	}
+	this.setShouldUpdateWordGroupNameList = function(someBoolean){
+		this.shouldUpdateWordGroupNameList = someBoolean;
+	}
+	this.getShouldUpdateWordGroupNameList=function(){
+		if (this.shouldUpdateWordGroupNameList==null){
+			this.shouldUpdateWordGroupNameList=false;	
+		}
+		return this.shouldUpdateWordGroupNameList;
 	}
 	
 	
