@@ -47,6 +47,10 @@ showWordsApp.controller('showWords', function(arrayUtil, wordManagerSession) {
 	this.actionSuccessAll = function() {
 		return this.status == 'finished' && this.lastResult
 	}
+	
+	this.isGroupSelected = function(){
+		return !wordManagerSession.getSelectedGroupName==null
+	}
 
 	this.init = function() {
 		this.selectedList = wordManagerSession.getSelectedGroupName();

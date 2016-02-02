@@ -34,11 +34,13 @@
 				<tr ng-repeat="word in showWordsControl.words">
 					<td>{{ word.engWord }}</td>
 
-					<td><button class="btn btn-primary btn-sm"
+					<td><button class="btn btn-primary btn-xs"
 						ng-click="showWordsControl.selectWord(word.engWord)" ng-disabled="showWordsControl.actionSuccessAll()">select</button></td>
 				</tr>
-			</table>
-			<a class="btn btn-info" ng-click="showWordsControl.reset()" >Reset</a>
+			</table> 
+			<a class="btn btn-warning btn-sm" ng-click="showWordsControl.reset()" >Reset</a>
+			<a class="btn btn-primary btn-sm" ui-sref="show_words">Back</a>
+			<a class="btn btn-primary btn-sm" ui-sref="write_words">Next</a>
 		</div>
 		<div class="col-sm-6">
 			<img src="../img/voc6.jpg" class="img-thumbnail"></div>

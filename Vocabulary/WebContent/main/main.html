@@ -34,9 +34,9 @@
 		</div>
 		<ul class="nav navbar-nav">
 			<li><a ui-sref="word_group_selection">Group Selection</a></li>
-			<li><a ui-sref="show_words">Show Words</a></li>
-			<li><a ui-sref="word_selection">Words Selections</a></li>
-			<li><a ui-sref="write_words">Write Words</a></li>
+			<li><a ui-sref="show_words" ng-show="mainControl.isGroupSelected()">Show Words</a></li>
+			<li><a ui-sref="word_selection" ng-show="mainControl.isGroupSelected()">Words Selections</a></li>
+			<li><a ui-sref="write_words" ng-show="mainControl.isGroupSelected()">Write Words</a></li>
 		</ul>
 	</nav>
 
