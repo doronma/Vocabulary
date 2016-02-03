@@ -16,8 +16,20 @@ wordGroupSelectionApp.controller('wordGroupSelection', function(wordManagerSessi
 		wordManagerSession.setSelectedGroupName(groupName);
 		this.selectedGroupName = groupName
 		wordManagerServer.getWordGroup(groupName).then(function(result) {
-			wordManagerSession.setCurrentWordList(result)
+			wordManagerSession.setCurrentWordList(result);
 			$state.go('show_words');
+		});
+		
+	}
+	
+	this.editWordGroup = function(groupName){ 
+		console.log('in Edit Word Group');
+		wordManagerSession.setSelectedGroupName(groupName);
+		this.selectedGroupName = groupName
+		wordManagerServer.getWordGroup(groupName).then(function(result) {
+			wordManagerSession.setCurrentWordList(result);
+			wordManagerSession.setEditMode(true);
+			$state.go('edit_words');
 		});
 		
 	}
@@ -35,7 +47,7 @@ wordGroupSelectionApp.controller('wordGroupSelection', function(wordManagerSessi
 				})
 	}
 	
-	//test
+	
 	this.deleteWordGroup = function(groupName){
 		console.log('Deleting - ' + groupName);
 		var currentController = this;
@@ -51,6 +63,7 @@ wordGroupSelectionApp.controller('wordGroupSelection', function(wordManagerSessi
 	// fetch data on startup
 	this.init = function() {
 		this.isLoading = true;
+		wordManagerSession.setEditMode(false);
 		if (wordManagerSession.getSelectedGroupName()== null || wordManagerSession.getShouldUpdateWordGroupNameList()) {
 			this.getWordGroupNameList();
 			 wordManagerSession.setShouldUpdateWordGroupNameList(false);	

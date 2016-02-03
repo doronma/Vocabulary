@@ -3,12 +3,15 @@
 		<div ng-controller='wordEdit as wordEditController'>
 			<div ng-show="!wordEditController.showSaveSuccess">
 
-				<div class="alert alert-info">
-					Current Selected Word List: <a href="#"
+				<div class="alert alert-info" ng-show="!wordEditController.getIsEditMode()">
+					Current Selected Word List: <a href="#" ng-show="!wordEditController.getIsEditMode()"
 						editable-text="wordEditController.groupName" e-required
 						e-placeholder="Group Name"><strong>{{
 							wordEditController.groupName || 'Group Name' }}</strong></a>
 
+				</div>
+				<div class="alert alert-info" ng-show="wordEditController.getIsEditMode()">
+					Current Selected Word List: <strong>{{wordEditController.groupName }}</strong>
 				</div>
 
 				<table class="table table-bordered table-hover table-condensed">

@@ -60,6 +60,18 @@ vocServices.service('wordManagerServer', function($http) {
 		});
 		}
 	
+	this.editWordGroup = function(wordGroup){
+		var currentURL = 'http://localhost:8080/editWordGroup';
+		return $http({
+			method : "POST",
+			url : currentURL,
+			data : wordGroup
+		}).then(function(result){
+			console.log('in post then');
+			return result.data;
+		});
+		}
+	
 	this.deleteWordGroup = function(groupName){
 		var currentURL = 'http://localhost:8080/deleteWordGroup';
 		return $http({
@@ -120,6 +132,13 @@ vocServices.service('wordManagerSession', function(wordManagerServer) {
 		}
 		return this.shouldUpdateWordGroupNameList;
 	}
+	this.getEditMode = function(){
+		return this.editMode;
+	}
+	this.setEditMode = function(editMode){
+		this.editMode = editMode;
+	}
+	
 	
 	
 	
