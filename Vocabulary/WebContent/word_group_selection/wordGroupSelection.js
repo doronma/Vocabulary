@@ -38,7 +38,14 @@ wordGroupSelectionApp.controller('wordGroupSelection', function(wordManagerSessi
 	//test
 	this.deleteWordGroup = function(groupName){
 		console.log('Deleting - ' + groupName);
-		//wordManagerServer.sendWordGroup(wordManagerSession.getCurrentWordListObject());
+		var currentController = this;
+		wordManagerServer.deleteWordGroup(groupName).then(function(result) {
+			console.log('result is - ' + result);
+			currentController.getWordGroupNameList();
+			wordManagerSession.setShouldUpdateWordGroupNameList(false);
+		});
+		
+		
 	}
 
 	// fetch data on startup

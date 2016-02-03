@@ -48,6 +48,10 @@ wordEditApp.controller('wordEdit', function(wordManagerServer,wordManagerSession
 	};
 	
 	this.saveData = function(){
+		if (this.groupName==null || this.groupName.length==0){
+			alert ('please set Word Group name !');
+			return;
+		}
 		this.wordGroup = {
 			groupName:this.groupName,
 			wordList : this.words	
