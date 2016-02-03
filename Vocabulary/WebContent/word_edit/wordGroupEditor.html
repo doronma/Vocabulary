@@ -4,14 +4,16 @@
 			<div ng-show="!wordEditController.showSaveSuccess">
 
 				<div class="alert alert-info" ng-show="!wordEditController.getIsEditMode()">
-					Current Selected Word List: <a href="#" ng-show="!wordEditController.getIsEditMode()"
+				<u><strong>New Word Group</strong> </u>
+				<h5>	Current Selected Word List: <a href="#" ng-show="!wordEditController.getIsEditMode()"
 						editable-text="wordEditController.groupName" e-required
 						e-placeholder="Group Name"><strong>{{
-							wordEditController.groupName || 'Group Name' }}</strong></a>
+							wordEditController.groupName || 'Group Name' }}</strong></a></h5>
 
 				</div>
 				<div class="alert alert-info" ng-show="wordEditController.getIsEditMode()">
-					Current Selected Word List: <strong>{{wordEditController.groupName }}</strong>
+				<u><strong>Word Group Edit</strong> </u>
+				<h5>	Current Selected Word List: <strong>{{wordEditController.groupName }}</strong></h5>
 				</div>
 
 				<table class="table table-bordered table-hover table-condensed">
