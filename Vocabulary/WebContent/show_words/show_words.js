@@ -51,6 +51,17 @@ showWordsApp.controller('showWords', function(arrayUtil, wordManagerSession) {
 	this.isGroupSelected = function(){
 		return !wordManagerSession.getSelectedGroupName==null
 	}
+	
+	this.getShowHint =function(){
+		if (this.swShowHint==null){
+			this.swShowHint=false;
+		}
+		return this.swShowHint;
+	}
+	
+	this.showHint = function(showHintValue){
+		this.swShowHint = showHintValue;
+	}
 
 	this.init = function() {
 		this.selectedList = wordManagerSession.getSelectedGroupName();

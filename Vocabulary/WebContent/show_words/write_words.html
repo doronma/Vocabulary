@@ -3,10 +3,13 @@
 	<div class="row">
 		<div class="col-sm-6">
 			<div class="alert alert-info">
-			<u><strong>Word writing in Word Group</strong> </u>
-				<h5>Current Selected Word List: <strong>{{showWordsControl.selectedList}}</strong>, Word {{showWordsControl.counter+1}} of
-					{{showWordsControl.wordList.length}} : <strong>{{showWordsControl.wordList[showWordsControl.counter].hebWord}}</strong></h5>
-				
+				<u><strong>Word writing in Word Group</strong> </u>
+				<h5>
+					Current Selected Word List: <strong>{{showWordsControl.selectedList}}</strong>,
+					Word {{showWordsControl.counter+1}} of
+					{{showWordsControl.wordList.length}} : <strong>{{showWordsControl.wordList[showWordsControl.counter].hebWord}}</strong>
+				</h5>
+
 			</div>
 			<div class="alert alert-info"
 				ng-if="showWordsControl.status=='start'">
@@ -27,19 +30,33 @@
 
 
 			<div class="form-group">
+
+
 				<div class="row">
 					<div class="col-sm-3">
 						<label for="translation">Translate:</label>
 					</div>
 					<div class="col-sm-6">
-						<input type="text" class="form-control" id="translation"  ng-keyup="$event.keyCode == 13 && showWordsControl.checkWord()"
+						<input type="text" class="form-control" id="translation"
+							ng-keyup="$event.keyCode == 13 && showWordsControl.checkWord()"
+							ng-focus="showWordsControl.showHint(false)"
 							ng-model="showWordsControl.translation">
 					</div>
 					<div class="col-sm-3">
 						<button class="btn btn-primary"
 							ng-click="showWordsControl.checkWord()"
 							ng-disabled="showWordsControl.actionSuccessAll()">send</button>
+						<a class="btn btn-info" ng-click="showWordsControl.showHint(true)">Hint</a>
 					</div>
+				</div>
+				<div class="row" ng-show="showWordsControl.getShowHint()">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-9">
+						<strong>{{showWordsControl.wordList[showWordsControl.counter].engWord}}</strong>
+					</div>
+				</div>
+				<div class="row" ng-show="!showWordsControl.getShowHint()">
+					<div class="col-sm-12">&nbsp;</div>
 				</div>
 			</div>
 			<a class="btn btn-warning btn-sm" ng-click="showWordsControl.reset()">Reset</a>

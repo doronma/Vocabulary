@@ -80,6 +80,17 @@ wordEditApp.controller('wordEdit', function(wordManagerServer,
 	this.getIsEditMode = function(){
 		return wordManagerSession.getEditMode();
 	}
+	
+	this.isWordGroupExist = function(wordGroupName){
+		var wordGroupNameList = wordManagerSession.getWordGroupNameList();
+		var length = wordGroupNameList.length ;
+		for (var i=0;i<length;i++){
+			if (wordGroupName==wordGroupNameList[i]){
+				return true;
+			}
+		}
+		return false;
+	}
 
 	this.init = function() {
 		if (wordManagerSession.getEditMode()) {
